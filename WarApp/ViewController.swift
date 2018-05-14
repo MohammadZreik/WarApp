@@ -36,6 +36,19 @@ class ViewController: UIViewController {
 
     @IBAction func DealTapped(_ sender: Any) {
         
+        UpdateCards()
+        
+    }
+    
+    // Method to update cards after shaking the iphone (at the end of the shake)
+   override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        
+        UpdateCards()
+    }
+    
+    // Method to update cards and check score
+    func UpdateCards(){
+        
         // Generate random numbers
         
         let LeftCard = arc4random_uniform(13) + 2
@@ -55,7 +68,7 @@ class ViewController: UIViewController {
             PlayerLabel.text = String(PlayerScore)
             
         }
-        
+            
         else if RightCard > LeftCard {
             
             CpuScore += 1
