@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
+    
+  
+    
     
     // Images and Labels Outlet
     
@@ -23,6 +27,10 @@ class ViewController: UIViewController {
     var PlayerScore = 0
     var CpuScore = 0
     
+    // Sound Variable
+    var audioPlayer : AVAudioPlayer!
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,14 +43,14 @@ class ViewController: UIViewController {
     }
 
     @IBAction func DealTapped(_ sender: Any) {
-        
+        playSound()
         UpdateCards()
         
     }
     
     // Method to update cards after shaking the iphone (at the end of the shake)
    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
-        
+        playSound()
         UpdateCards()
     }
     
@@ -78,6 +86,22 @@ class ViewController: UIViewController {
         
     }
     
+    // Method to play sound file from Project folder
+    
+    func playSound() {
+        
+        let SoundUrl = Bundle.main.url(forResource: "Deal", withExtension: "wav")
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: SoundUrl!)
+        }
+        
+        catch {
+            print(error)
+        }
+        audioPlayer.play()
+    }
+    
+
     
 }
 
